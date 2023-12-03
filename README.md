@@ -1,0 +1,2 @@
+# AxMath_export_process
+C语言实现处理AxMath导出的latex代码，使其能直接在编译器中编译

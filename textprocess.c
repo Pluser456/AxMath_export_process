@@ -9,38 +9,38 @@ int isnottext(char* str);
 int islatexspace(char* str);
 int main(void)
 {
-	char words[LINE][STLEN];//´æ´¢ÊäÈëµÄÊı×é
-	int ct = 0;//×ÜĞĞÊı
-	int k = 0;//Êä³öÖ¸ÕëÊı
-	int leng = 0;//Ò»ĞĞµÄ×Ö·ûÊı
+	char words[LINE][STLEN];//å­˜å‚¨è¾“å…¥çš„æ•°ç»„
+	int ct = 0;//æ€»è¡Œæ•°
+	int k = 0;//è¾“å‡ºæŒ‡é’ˆæ•°
+	int leng = 0;//ä¸€è¡Œçš„å­—ç¬¦æ•°
 	char* pt = NULL;
 	char* pt1 = NULL;
 	char* pt2 = NULL;
-	puts("ÊäÈëÒª´¦ÀíµÄ×Ö·û´®, ÓÃ»»ĞĞºÍ\"#\"½áÊøÊäÈë, ÓÃ»»ĞĞºÍ\"*\"ÍË³ö.\n");
-	puts("Çë²»Òª³¬¹ı100ĞĞ, Ò»ĞĞ²»Òª³¬¹ı500¸ö×Ö·û.");
+	puts("è¾“å…¥è¦å¤„ç†çš„å­—ç¬¦ä¸², ç”¨æ¢è¡Œå’Œ\"#\"ç»“æŸè¾“å…¥, ç”¨æ¢è¡Œå’Œ\"*\"é€€å‡º.\n");
+	puts("è¯·ä¸è¦è¶…è¿‡100è¡Œ, ä¸€è¡Œä¸è¦è¶…è¿‡500ä¸ªå­—ç¬¦.");
 	while(1)
 	{ 
 		while (ct < LINE && fgets(words[ct], STLEN, stdin) != NULL && words[ct][0] != '#' && words[ct][0] != '*')
 		{
 			ct++;
 		}
-		if(words[ct][0] == '#')//Õı³£Çé¿öÏÂÑ­»·´¦Àí×Ö·û
+		if(words[ct][0] == '#')//æ­£å¸¸æƒ…å†µä¸‹å¾ªç¯å¤„ç†å­—ç¬¦
 		{
 			for (int i = 0; i < ct; i++)
 			{
-				if (strstr(words[i], "\\\\") != NULL)//Ñ°ÕÒ"\\"×Ö·û´®³öÏÖµÄÎ»ÖÃ
+				if (strstr(words[i], "\\\\") != NULL)//å¯»æ‰¾"\\"å­—ç¬¦ä¸²å‡ºç°çš„ä½ç½®
 					memset(words[i], 0, STLEN);
 				int j;
 
-				if (strstr(words[i], "\\mathbf{") != NULL && words[i][0] != '\0' && words[i][0] != '\n')//°Ñ¶ÔÎÄ×Ö²¿·ÖµÄ¼Ó´Ö²¿·Ö´Ómathbf¸Ä³Étextbf
+				if (strstr(words[i], "\\mathbf{") != NULL && words[i][0] != '\0' && words[i][0] != '\n')//æŠŠå¯¹æ–‡å­—éƒ¨åˆ†çš„åŠ ç²—éƒ¨åˆ†ä»mathbfæ”¹æˆtextbf
 				{
-					//Ö¸ÕëptºÍpt2·Ö±ğÖ¸Ïò\mathbf¿ªÊ¼ºÍ½áÊø´¦
+					//æŒ‡é’ˆptå’Œpt2åˆ†åˆ«æŒ‡å‘\mathbfå¼€å§‹å’Œç»“æŸå¤„
 					pt = strstr(words[i], "\\mathbf{");
-					int flag = 0;//ÓÃÓÚÅĞ¶Ï\mathbf¼Ó´ÖµÄÄÚÈİÊÇÎÄ×Ö»¹ÊÇ¹«Ê½
+					int flag = 0;//ç”¨äºåˆ¤æ–­\mathbfåŠ ç²—çš„å†…å®¹æ˜¯æ–‡å­—è¿˜æ˜¯å…¬å¼
 					pt1 = pt;
 					do
 					{
-						pt2 = strstr(pt1, "}");//ÎªÁË·ÀÖ¹pt1ÊÇNULL
+						pt2 = strstr(pt1, "}");//ä¸ºäº†é˜²æ­¢pt1æ˜¯NULL
 						for (; pt1 < pt2; pt1++)
 						{
 							if (*pt1 < 0)
@@ -57,8 +57,8 @@ int main(void)
 
 					} while (pt != NULL);
 				}
-				if (strstr(words[i], "\\text{") == NULL && words[i][0] != '\0' && words[i][0] != '\n')//Èç¹ûÃ»ÓĞ"\text{", ÇÒ¸ÃĞĞ²»ÊÇ¿ÕĞĞ
-					//Çé¿ö1, ¸ÃĞĞÈ«ÊÇ¹«Ê½
+				if (strstr(words[i], "\\text{") == NULL && words[i][0] != '\0' && words[i][0] != '\n')//å¦‚æœæ²¡æœ‰"\text{", ä¸”è¯¥è¡Œä¸æ˜¯ç©ºè¡Œ
+					//æƒ…å†µ1, è¯¥è¡Œå…¨æ˜¯å…¬å¼
 				{
 					for (j = ct; j > i; j--)
 					{
@@ -73,18 +73,18 @@ int main(void)
 					i = i + 2;
 					ct = ct + 2;
 				}
-				else if (words[i][0] != '\0' && words[i][0] != '\n')//Èç¹ûÓĞ"\text{", ÇÒ¸ÃĞĞ²»ÊÇ¿ÕĞĞ
+				else if (words[i][0] != '\0' && words[i][0] != '\n')//å¦‚æœæœ‰"\text{", ä¸”è¯¥è¡Œä¸æ˜¯ç©ºè¡Œ
 				{
-					//Çé¿ö2¼°Çé¿ö3²¿·Ö
+					//æƒ…å†µ2åŠæƒ…å†µ3éƒ¨åˆ†
 					if (strstr(words[i], "\\left(") != NULL)
 					{
 						pt = strstr(words[i], "\\left(");
-						int flag = 0;//ÓÃÓÚÅĞ¶ÏÀ¨ºÅÄÚ²¿ÊÇ·ñÈ«ÊÇÎÄ×Ö»ò×ÖÄ¸
+						int flag = 0;//ç”¨äºåˆ¤æ–­æ‹¬å·å†…éƒ¨æ˜¯å¦å…¨æ˜¯æ–‡å­—æˆ–å­—æ¯
 						pt1 = pt;
 						do
 						{
-							//pt2 = strrchr(pt, ')')-6;//ÎªÁË·ÀÖ¹pt1ÊÇNULL
-							pt2 = strstr(pt1, "\\right)");//ÎªÁË·ÀÖ¹pt1ÊÇNULL
+							//pt2 = strrchr(pt, ')')-6;//ä¸ºäº†é˜²æ­¢pt1æ˜¯NULL
+							pt2 = strstr(pt1, "\\right)");//ä¸ºäº†é˜²æ­¢pt1æ˜¯NULL
 							for (; pt1 < pt2; pt1++)
 							{
 								if (*pt1 < 0)
@@ -95,33 +95,33 @@ int main(void)
 								strcpy(pt, "(");
 								strcat(pt, pt + 6);
 								pt2 -= 5;
-								strcpy(pt2, ")");//É¾µô\leftÖ®ºópt2Ö¸Ïò)
+								strcpy(pt2, ")");//åˆ æ‰\leftä¹‹åpt2æŒ‡å‘)
 								strcat(pt2, pt2 + 7);
 								flag = 0;
 							}
 							pt = strstr(pt2, "\\left(");
 							pt1 = pt;
-							//´¦ÀíÎÄ×ÖºÍ¹«Ê½Í¬Ê±´æÔÚÓÚÒ»ĞĞÊ±µÄÀ¨ºÅ, °Ñ\left(ÓÃ(Ìæ»», \right)ÓÃ)Ìæ»».
+							//å¤„ç†æ–‡å­—å’Œå…¬å¼åŒæ—¶å­˜åœ¨äºä¸€è¡Œæ—¶çš„æ‹¬å·, æŠŠ\left(ç”¨(æ›¿æ¢, \right)ç”¨)æ›¿æ¢.
 						} while (pt != NULL);
 					}
-					//Ñ°ÕÒĞèÒªÓÃÃÀÔª·ûºÅ°üÎ§ÆğÀ´µÄ×ÖÄ¸ºÍÊı×Ö
+					//å¯»æ‰¾éœ€è¦ç”¨ç¾å…ƒç¬¦å·åŒ…å›´èµ·æ¥çš„å­—æ¯å’Œæ•°å­—
 					leng = strlen(words[i]);
 					int dollar_flag = 0;//
 					pt = words[i];
 					char* end = pt + leng;
-					//int flag = 0;//Ö¸ÕëËùÖ¸ÊÇºº×ÖµÄÅĞ¶Ï±êÖ¾
+					//int flag = 0;//æŒ‡é’ˆæ‰€æŒ‡æ˜¯æ±‰å­—çš„åˆ¤æ–­æ ‡å¿—
 					pt1 = strstr(words[i], "\\text");
 					pt2 = strstr(pt1, "}");
 					for (; pt < end; pt++)
 					{
 						if (strstr(pt2, "\\text") != NULL && pt > pt2)
 						{
-							pt1 = strstr(pt2, "\\text");//µ±µ±Ç°×Ö·û´®Ö¸Õë³¬¹ıÎÄ×ÖÖ¸ÕëÊ±, ¸üĞÂÎÄ×ÖÖ¸Õë(Ò²¾ÍÊÇÖ¸Ïò'\text{'ºÍ'}'µÄÖ¸Õë)µÄÎ»ÖÃ
+							pt1 = strstr(pt2, "\\text");//å½“å½“å‰å­—ç¬¦ä¸²æŒ‡é’ˆè¶…è¿‡æ–‡å­—æŒ‡é’ˆæ—¶, æ›´æ–°æ–‡å­—æŒ‡é’ˆ(ä¹Ÿå°±æ˜¯æŒ‡å‘'\text{'å’Œ'}'çš„æŒ‡é’ˆ)çš„ä½ç½®
 							pt2 = strstr(pt1, "}");
 						}
 
 						if (*pt < 0)
-							;//ÎªÁËÅÅ³ı*ptÊÇºº×ÖµÄÇé¿ö, ÕâÖÖÇé¿öÏÂisalnum()»á±¨´í
+							;//ä¸ºäº†æ’é™¤*ptæ˜¯æ±‰å­—çš„æƒ…å†µ, è¿™ç§æƒ…å†µä¸‹isalnum()ä¼šæŠ¥é”™
 						else if ((isalnum(*pt) || *pt == '\\') && isnottext(pt) && dollar_flag == 0 && (pt < pt1 || pt>pt2))
 						{
 							dollar_flag = 1;
@@ -129,10 +129,10 @@ int main(void)
 							pt1 += 1;
 							pt2 += 1;
 							end++;
-							pt += 1;//Ìø¹ıÕâ¸öĞÂ¼ÓµÄ$ºÍºóÃæµÄ×Ö·û(Ö÷ÒªÊÇÎªÁËÌø¹ı'\')(ÔİÊ±ºöÂÔÕâÌõ×¢ÊÍ,Ô­À´ÊÇpt+=2
+							pt += 1;//è·³è¿‡è¿™ä¸ªæ–°åŠ çš„$å’Œåé¢çš„å­—ç¬¦(ä¸»è¦æ˜¯ä¸ºäº†è·³è¿‡'\')(æš‚æ—¶å¿½ç•¥è¿™æ¡æ³¨é‡Š,åŸæ¥æ˜¯pt+=2
 						}
 						if (*pt < 0)
-							;//ÎªÁËÅÅ³ı*ptÊÇºº×ÖµÄÇé¿ö, ÕâÖÖÇé¿öÏÂisalnum»á±¨´í
+							;//ä¸ºäº†æ’é™¤*ptæ˜¯æ±‰å­—çš„æƒ…å†µ, è¿™ç§æƒ…å†µä¸‹isalnumä¼šæŠ¥é”™
 
 						else if ((*pt == ',' || *pt == '.' || pt == pt1 || isendofequation(pt)) && dollar_flag == 1 && *pt != '$')
 						{
@@ -143,7 +143,7 @@ int main(void)
 							end++;
 						}
 						else if (islatexspace(pt))
-							pt += 1;//Èç¹ûÊÇÓöµ½ÁË'\,'µÄÇé¿ö, Ö±½ÓÌø¹ıÕâÁ½¸ö×Ö·û(
+							pt += 1;//å¦‚æœæ˜¯é‡åˆ°äº†'\,'çš„æƒ…å†µ, ç›´æ¥è·³è¿‡è¿™ä¸¤ä¸ªå­—ç¬¦(
 
 					}
 					do
@@ -163,16 +163,16 @@ int main(void)
 			puts("\n");
 			for (k = 0; k < ct; k++)
 				fputs(words[k], stdout);
-			puts("\n\n´¦ÀíÍê³É.");
-			puts("¼ÌĞø?(ÓÃ»»ĞĞºÍ\"#\"½áÊøÊäÈë, ÓÃ»»ĞĞºÍ\"*\"ÍË³ö)\n");
-			int ct = 0;//×ÜĞĞÊı
-			int k = 0;//Êä³öÖ¸ÕëÊı
-			int leng = 0;//Ò»ĞĞµÄ×Ö·ûÊı
+			puts("\n\nå¤„ç†å®Œæˆ.");
+			puts("ç»§ç»­?(ç”¨æ¢è¡Œå’Œ\"#\"ç»“æŸè¾“å…¥, ç”¨æ¢è¡Œå’Œ\"*\"é€€å‡º)\n");
+			int ct = 0;//æ€»è¡Œæ•°
+			int k = 0;//è¾“å‡ºæŒ‡é’ˆæ•°
+			int leng = 0;//ä¸€è¡Œçš„å­—ç¬¦æ•°
 			char* pt = NULL;
 			char* pt1 = NULL;
 			char* pt2 = NULL;
 			memset(words, 0, STLEN* LINE);
-			//³õÊ¼»¯±äÁ¿, ÒÔ½øĞĞÏÂÒ»ÂÖ´¦Àí
+			//åˆå§‹åŒ–å˜é‡, ä»¥è¿›è¡Œä¸‹ä¸€è½®å¤„ç†
 		}
 		else if (words[ct][0] == '*')
 			break;
@@ -180,13 +180,13 @@ int main(void)
 		
 		
 	}
-	puts("ÒÑÍË³ö...");
+	puts("å·²é€€å‡º...");
 	getchar();
 	return 0;
 }
 
 void insert_str(char* str1, char* str2)
-{//²ÎÊıstr1ÊÇÒª²åÈë×Ö·û´®str2µÄÎ»ÖÃ
+{//å‚æ•°str1æ˜¯è¦æ’å…¥å­—ç¬¦ä¸²str2çš„ä½ç½®
 	char str0[STLEN];
 	strcpy(str0, str1);
 	strcpy(str1, str2);
@@ -209,7 +209,7 @@ int islatexspace(char* str)
 		return 0;
 }
 
-int isendofequation(char* str)//ÓÃÓÚÅĞ¶ÏÊÇ·ñµ½´ï¹«Ê½Ä©Î², ÆäÔ­ÀíÊÇ¿¿ÅĞ¶Ï¸ÃÖ¸ÕëºóÃæÊÇ·ñÓĞÊı×Ö»òÕß×ÖÄ¸
+int isendofequation(char* str)//ç”¨äºåˆ¤æ–­æ˜¯å¦åˆ°è¾¾å…¬å¼æœ«å°¾, å…¶åŸç†æ˜¯é åˆ¤æ–­è¯¥æŒ‡é’ˆåé¢æ˜¯å¦æœ‰æ•°å­—æˆ–è€…å­—æ¯
 {
 	char* pt0 = str;
 	int	leng = strlen(str);
